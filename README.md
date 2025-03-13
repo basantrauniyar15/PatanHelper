@@ -29,6 +29,18 @@
 2. Run the Chatbot:
     ```bash
     python chatbot.py
+---
 
+## 🙌 Acknowledgements
+Special thanks to the Patan Hospital staff for inspiration and real-world use-case ideas.
+Python community and open-source developers.
+Your own curiosity and motivation toward building tech for real-world social utility.
 ## 📜 License
 This project is licensed under the [MIT License](./LICENSE).
+
+----
+## 🔗 Let’s Make Healthcare Info More Accessible – One Chat at a Time!
+yaml
+Copy
+Edit
+

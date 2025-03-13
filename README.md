@@ -1,5 +1,4 @@
 # 🏥 PatanHelper - Hospital Information Chatbot
-----
 **PatanHelper** is a Python-based chatbot designed to assist users with information about **Patan Hospital**. It provides quick answers to common queries related to hospital facilities, emergency services, available doctors, directions, ambulance services, lab locations, and more.
 ----
 ## 🔍 Features
@@ -35,6 +34,8 @@
 Special thanks to the Patan Hospital staff for inspiration and real-world use-case ideas.
 Python community and open-source developers.
 Your own curiosity and motivation toward building tech for real-world social utility.
+
+----
 ## 📜 License
 This project is licensed under the [MIT License](./LICENSE).
 

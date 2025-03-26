@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PatanHelper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Centering vertically */
+        }
+        .container {
+            width: 400px; /* Fixed width for better layout */
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px; /* Padding for aesthetics */
+            text-align: center; /* Centered text */
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 5px;
+            font-size: 1.8em; /* Adjusted font size */
+        }
+        h2 {
+            color: #6c757d;
+            margin-bottom: 15px; /* Increased margin for spacing */
+            font-size: 1.2em; /* Adjusted font size */
+        }
+        #chatbox {
+            border: 1px solid #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            height: 150px; /* Reduced height of the chatbox */
+            overflow-y: auto;
+            margin-bottom: 15px; /* Increased margin for spacing */
+            background-color: #f1f1f1; /* Light background for chatbox */
+            text-align: left; /* Left align text in chatbox */
+            width: calc(100% - 20px); /* Full width of container, accounting for padding */
+        }
+        #user-input {
+            width: 70%; /* Reduced width */
+            padding: 10px; /* Increased padding */
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            margin-right: 10px; /* Spacing for the button */
+        }
+        #send-button {
+            padding: 10px; /* Increased padding */
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #send-button:hover {
+            background-color: #0056b3;
+        }
+        #map {
+            width: 100%; /* Full width of the container */
+            height: 150px; /* Reduced height of the map */
+            border: 1px solid #007bff;
+            margin-top: 15px; /* Increased margin for spacing */
+            border-radius: 5px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow to prevent cutting off */
+        }
+        iframe {
+            width: 100%; /* Full width for the iframe */
+            height: 100%; /* Full height for the iframe */
+            border: none; /* Remove default border */
+            padding: 0; /* No padding */
+            margin: 0; /* No margin */
+        }
+        .contact-info {
+            margin-top: 15px; /* Spacing from map */
+            font-size: 0.9em; /* Smaller font size */
+            color: #6c757d; /* Gray color for contact info */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>PatanHelper</h1>
+    <h2>Welcome to Patan Hospital</h2>
+    
+    <div id="chatbox">
+        <div><strong>PatanHelper:</strong> Welcome to Patan Helper! How may I help you?</div>
+    </div>
+    
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <input type="text" id="user-input" placeholder="Type your message..." />
+        <button id="send-button">Send</button>
+    </div>
+    
+    <h2>Location</h2>
+    <div id="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.2533017154895!2d85.321817!3d27.669185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1905c65e0e69%3A0x8c76ff57b4a834d4!2sPatan%20Hospital!5e0!3m2!1sen!2snp!4v1695503155604!5m2!1sen!2snp" 
+            allowfullscreen="" 
+            loading="lazy"></iframe>
+    </div>
+    
+    <div class="contact-info">
+        <p>📞 Phone: +977 1-5555555</p>
+        <p>✉️ Email: contact@pathospital.com</p>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        const userInput = document.getElementById('user-input');
+        const message = userInput.value;
+        if (message.trim() === '') return;
+
+        // Display the user's message
+        const chatbox = document.getElementById('chatbox');
+        chatbox.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+        
+        // Send message to Flask backend
+        fetch('/ask', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                'message': message
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Display the bot's response
+            chatbox.innerHTML += `<div><strong>PatanHelper:</strong> ${data.response}</div>`;
+            chatbox.scrollTop = chatbox.scrollHeight; // Scroll to the bottom
+        });
+
+        // Clear input
+        userInput.value = '';
+    }
+
+    document.getElementById('send-button').addEventListener('click', sendMessage);
+
+    document.getElementById('user-input').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            sendMessage(); // Call sendMessage() function on Enter key
+        }
+    });
+</script>
+
+</body>
+</html>

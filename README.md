@@ -25,10 +25,10 @@
 1. Clone the repository:
    ```bash
    git clone https://github.com/basantrauniyar15/PatanHelper
-   cd patanhelper
+   cd PatanHelper Chatbot
 2. Run the Chatbot:
     ```bash
-    python chatbot.py
+    python app.py
 ----
 ## 📜 License
 This project is licensed under the [MIT License](./LICENSE).

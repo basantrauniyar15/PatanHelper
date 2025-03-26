@@ -25,6 +25,7 @@
 1. Clone the repository:
    ```bash
    git clone https://github.com/basantrauniyar15/PatanHelper
+   cd PatanHelper
    cd PatanHelper Chatbot
 2. Run the Chatbot:
     ```bash
